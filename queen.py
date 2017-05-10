@@ -1,4 +1,3 @@
-import operator as op
 from itertools import chain, islice
 from time import time
 
