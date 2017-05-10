@@ -8,7 +8,7 @@ def main():
     for i, ans in enumerate(islice(solve(8), num_solution)):
         show(ans)
         print('total {0:.6f}s'.format(time() - t))
-        print('aberage {0:.6f}s'.format((time() - t) / (i+1)))
+        print('average {0:.6f}s'.format((time() - t) / (i+1)))
 
 
 def solve(length):
