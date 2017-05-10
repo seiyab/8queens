@@ -3,15 +3,15 @@ from itertools import chain, islice
 from time import time
 
 def main():
-    num_solution = 100
+    num_solution = None
     t = time()
     for i, ans in enumerate(islice(solve(8), num_solution)):
         show(ans)
-        print('total {}s'.format(time() - t))
-        print('aberage {}s'.format((time() - t) / (i+1)))
+        print('total {0:.6f}s'.format(time() - t))
+        print('aberage {0:.6f}s'.format((time() - t) / (i+1)))
 
 
-def solve(length=8):
+def solve(length):
     def valid(x, y, queens):
         return all(not(xq==x or yq==y or xq-yq==x-y or xq+yq==x+y) for xq, yq in queens)
 
