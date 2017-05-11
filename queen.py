@@ -12,27 +12,27 @@ def main():
 
 def solve(length):
     """length: int -> iter<[(int, int)]>
-    solve length x length queen problem.
+    solves "length" x "length" queen problem.
     each element of return: a solution for the problem.
     each element of a solution: a coordinate of a queen.
     """
     def valid(x, y, queens):
         """x: int -> y: int -> queens: [(int, int)] -> bool
-        whether we can put a queen at (x, y) when queens are already put.
+        whether we can put a queen at ("x", "y") when "queens" are already put.
         """
         return all(xq!=x and yq!=y and xq-yq!=x-y and xq+yq!=x+y for xq, yq in queens)
 
-    def solve_row(i_row, queens):
-        """i_row: int -> queens: [(int, int)] -> iter<[(int, int)]>
-        solve length x length queenproblem assuming row y is already filled by "queens" for y<"irow".
+    def solve_col(x, queens):
+        """x: int -> queens: [(int, int)] -> iter<[(int, int)]>
+        solves the problem assuming column i is already filled by "queens" for all i<"x".
         """
-        if i_row==length:
+        if x==length:
             yield queens
         else:
-            valid_ys = (y for y in range(length) if valid(i_row, y, queens))
-            answers = (solve_row(i_row+1, queens + [(i_row, y)]) for y in valid_ys)
+            valid_ys = (y for y in range(length) if valid(x, y, queens))
+            answers = (solve_col(x+1, queens + [(x, y)]) for y in valid_ys)
             yield from chain.from_iterable(answers)
-    yield from solve_row(0, [])
+    yield from solve_col(0, [])
 
 
 def show(queens):
